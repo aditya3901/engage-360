@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "977703922934",
+    "project_id": "engage-360-205d4",
+    "storage_bucket": "engage-360-205d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977703922934:android:ac3a1faa1c1b480ee3d0d7",
+        "android_client_info": {
+          "package_name": "com.example.engage_360"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977703922934-7ruhkkrd9ehr4shd52isdvfgtkua2cr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBULmjMGUye3hD7Yo8vHFwbzc49vmSxJ7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977703922934-7ruhkkrd9ehr4shd52isdvfgtkua2cr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
