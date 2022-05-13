@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:engage_360/constants.dart';
+import 'package:engage_360/models/user_model.dart';
 import 'package:engage_360/screens/screens.dart';
 import 'package:engage_360/services/multipart_request_service.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -91,7 +92,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void signUpUser() async {
-    if (_nameController.text.isNotEmpty && _phoneController.text.isNotEmpty) {
+    if (_nameController.text.trim().isNotEmpty &&
+        _phoneController.text.trim().isNotEmpty) {
       setState(() {
         isLoading = true;
       });
@@ -108,6 +110,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       final prefs = await SharedPreferences.getInstance();
       prefs.setBool("user_exist", true);
+      final user = UserModel(
+        name: userName,
+        phone: phoneNum,
+        image: userImageUrl,
+        faceId: faceId,
+      );
+      final userJson = jsonEncode(user);
+      prefs.setString("current_user", userJson);
 
       Get.offAll(() => HomeScreen());
     }

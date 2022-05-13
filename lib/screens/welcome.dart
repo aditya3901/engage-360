@@ -66,7 +66,7 @@ class _WelcomeState extends State<Welcome> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.off(() => CameraScreen());
+                    Get.off(() => CameraScreen(purpose: "signup"));
                   },
                   style: ButtonStyle(
                     foregroundColor:
@@ -82,7 +82,34 @@ class _WelcomeState extends State<Welcome> {
                   child: const Padding(
                     padding: EdgeInsets.all(14),
                     child: Text(
-                      'SignUp to account',
+                      'Create New Account',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 14),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.off(() => LoginScreen());
+                  },
+                  style: ButtonStyle(
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.deepPurple),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24.0),
+                      ),
+                    ),
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.all(14),
+                    child: Text(
+                      'Login',
                       style: TextStyle(fontSize: 16),
                     ),
                   ),

@@ -1,12 +1,18 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
+import 'package:engage_360/models/user_model.dart';
 import 'package:engage_360/screens/screens.dart';
 import 'package:get/get.dart';
-import '../utils/utils.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import '../../utils/utils.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 
 class CameraScreen extends StatefulWidget {
+  String purpose;
+  UserModel? user;
+  CameraScreen({required this.purpose, this.user});
+
   @override
   _CameraScreenState createState() => _CameraScreenState();
 }
@@ -19,7 +25,7 @@ class _CameraScreenState extends State<CameraScreen> {
   List<Face>? faceList;
   FaceDetector? faceDetector;
   dynamic scanResults;
-  bool notWorking = true;
+  bool isWorking = false;
 
   initCamera() async {
     description = await UtilsScanner.getCamera(cameraDirection);
@@ -118,49 +124,56 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              _buildImage(),
-              Container(
-                margin: const EdgeInsets.only(bottom: 26),
-                child: ElevatedButton(
-                  onPressed: () async {
-                    if (cameraController != null &&
-                        cameraController!.value.isInitialized) {
-                      await cameraController!.initialize();
-                      final image = await cameraController!.takePicture();
-                      cameraImage = File(image.path);
-                      Get.offAll(() => SignUpScreen(cameraImage!));
-                    }
-                  },
-                  child: const Icon(Icons.camera_alt,
-                      size: 30, color: Colors.white),
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(18),
-                    primary: Colors.deepPurple, // <-- Button color
-                    onPrimary: Colors.white, // <-- Splash color
-                  ),
-                ),
-              )
-            ],
-          ),
-          faceList == null || faceList!.isEmpty
-              ? const Center(
-                  child: Text(
-                    "NO FACE DETECTED!!!",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
+      body: ModalProgressHUD(
+        inAsyncCall: isWorking,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                _buildImage(),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 26),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      if (cameraController != null &&
+                          cameraController!.value.isInitialized) {
+                        await cameraController!.initialize();
+                        final image = await cameraController!.takePicture();
+                        cameraImage = File(image.path);
+                        if (widget.purpose == "signup") {
+                          Get.offAll(() => SignUpScreen(cameraImage!));
+                        } else {
+                          Get.offAll(() => RecognisingUser(cameraImage!, widget.user!));
+                        }
+                      }
+                    },
+                    child: const Icon(Icons.camera_alt,
+                        size: 30, color: Colors.white),
+                    style: ElevatedButton.styleFrom(
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(18),
+                      primary: Colors.deepPurple, // <-- Button color
+                      onPrimary: Colors.white, // <-- Splash color
                     ),
                   ),
                 )
-              : Container(),
-        ],
+              ],
+            ),
+            faceList == null || faceList!.isEmpty
+                ? const Center(
+                    child: Text(
+                      "NO FACE DETECTED!!!",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                : Container(),
+          ],
+        ),
       ),
     );
   }
