@@ -1,7 +1,6 @@
 import 'package:engage_360/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Welcome extends StatefulWidget {
   @override
@@ -9,20 +8,6 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
-  void checkUserExist() async {
-    final prefs = await SharedPreferences.getInstance();
-    final exist = prefs.getBool("user_exist");
-    if (exist != null && exist == true) {
-      Get.offAll(() => HomeScreen());
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    checkUserExist();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

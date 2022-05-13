@@ -145,7 +145,8 @@ class _CameraScreenState extends State<CameraScreen> {
                         if (widget.purpose == "signup") {
                           Get.offAll(() => SignUpScreen(cameraImage!));
                         } else {
-                          Get.offAll(() => RecognisingUser(cameraImage!, widget.user!));
+                          Get.offAll(() =>
+                              RecognisingUser(cameraImage!, widget.user!));
                         }
                       }
                     },
@@ -164,9 +165,10 @@ class _CameraScreenState extends State<CameraScreen> {
             faceList == null || faceList!.isEmpty
                 ? const Center(
                     child: Text(
-                      "NO FACE DETECTED!!!",
+                      "NO FACE DETECTED !",
                       style: TextStyle(
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),

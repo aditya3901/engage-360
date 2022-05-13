@@ -4,3 +4,4 @@ export 'welcome.dart';
 export 'home_screen.dart';
 export './auth/login_screen.dart';
 export './auth/recognising_user.dart';
+export 'splash_screen.dart';
