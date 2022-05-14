@@ -1,7 +1,10 @@
 export 'auth/camera_screen.dart';
 export 'auth/signup_screen.dart';
 export 'welcome.dart';
-export 'home_screen.dart';
 export './auth/login_screen.dart';
 export './auth/recognising_user.dart';
 export 'splash_screen.dart';
+export './bottom_nav_bar/tabs_screen.dart';
+export './bottom_nav_bar/exam_screen.dart';
+export './bottom_nav_bar/profile_screen.dart';
+export './bottom_nav_bar/meet_screen.dart';

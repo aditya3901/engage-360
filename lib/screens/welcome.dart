@@ -78,7 +78,7 @@ class _WelcomeState extends State<Welcome> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.off(() => LoginScreen());
+                    Get.to(() => LoginScreen());
                   },
                   style: ButtonStyle(
                     foregroundColor:

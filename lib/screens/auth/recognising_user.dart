@@ -85,7 +85,7 @@ class _RecognisingUserState extends State<RecognisingUser> {
       final userJson = jsonEncode(user);
       prefs.setString("current_user", userJson);
 
-      Get.offAll(() => HomeScreen());
+      Get.offAll(() => TabsScreen());
     } else {
       Get.snackbar(
         "Login Failed! Face Didn't Match",
@@ -106,6 +106,7 @@ class _RecognisingUserState extends State<RecognisingUser> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: Color(0xfff7f6fb),
       body: Center(
         child: CupertinoActivityIndicator(radius: 16),
       ),

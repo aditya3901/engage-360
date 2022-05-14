@@ -119,7 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       final userJson = jsonEncode(user);
       prefs.setString("current_user", userJson);
 
-      Get.offAll(() => HomeScreen());
+      Get.offAll(() => TabsScreen());
     }
   }
 
@@ -152,6 +152,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 const SizedBox(height: 40),
+                const Text(
+                  'Registration',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 24),
+                  child: const Text(
+                    "One last step! Enter your name and phone number so that we know who you are",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black38,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(height: 28),
                 Container(
                   margin: const EdgeInsets.all(20),
                   child: Card(

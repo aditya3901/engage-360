@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
         final prefs = await SharedPreferences.getInstance();
         final exist = prefs.getBool("user_exist");
         if (exist != null && exist == true) {
-          Get.offAll(() => HomeScreen());
+          Get.offAll(() => TabsScreen());
         } else {
           Get.offAll(() => Welcome());
         }
