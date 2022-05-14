@@ -1,4 +1,6 @@
+import 'package:engage_360/screens/screens.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MeetScreen extends StatefulWidget {
   @override
@@ -44,7 +46,9 @@ class _MeetScreenState extends State<MeetScreen> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.to(() => VideoCallScreen());
+                            },
                             icon: const Icon(
                               Icons.video_camera_front,
                               size: 40,

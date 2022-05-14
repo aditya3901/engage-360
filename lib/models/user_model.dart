@@ -8,7 +8,7 @@ class UserModel {
 
   UserModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    phone = json['phone'];
+    phone = json['phoneNum'];
     image = json['image'];
     faceId = json['faceId'];
   }
@@ -16,7 +16,7 @@ class UserModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
-    data['phone'] = phone;
+    data['phoneNum'] = phone;
     data['image'] = image;
     data['faceId'] = faceId;
     return data;

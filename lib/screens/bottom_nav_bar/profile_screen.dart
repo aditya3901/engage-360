@@ -13,6 +13,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   String username = "";
   String userDp = "https://cdn.wallpapersafari.com/57/23/O0wQMK.jpg";
+  String phoneNum = "";
 
   void getUserData() async {
     final prefs = await SharedPreferences.getInstance();
@@ -22,6 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     username = user.name!;
     userDp = user.image!;
+    phoneNum = user.phone!;
     if (mounted) {
       setState(() {});
     }
@@ -128,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 60),
                   Text(
                     username,
                     style: const TextStyle(
@@ -137,7 +139,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       color: Colors.black54,
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 5),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.call),
+                      const SizedBox(width: 4),
+                      Text(
+                        "+91-$phoneNum",
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
