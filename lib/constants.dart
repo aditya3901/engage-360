@@ -6,7 +6,5 @@ const kVerifyUrl =
 
 const kAgoraAppId = "6930a7ac18674944aab09aab3937b130";
 
-const kAgoraTempToken =
-    "0066930a7ac18674944aab09aab3937b130IACgUZztDPuW0SLS+up+Im8sALgxljQUXRvPchtsaDqPyAx+f9gAAAAAEAA5DUG6GwaBYgEAAQAaBoFi";
+const kTokenServerUrl = "https://Agora-Node-TokenServer.suvosig6d.repl.co/access_token?channelName=";
 
-const kAgoraChannelName = "test";
