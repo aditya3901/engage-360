@@ -43,6 +43,7 @@ class _MeetScreenState extends State<MeetScreen> {
       } else {
         Get.offAll(
           () => VideoCallScreen(
+            clientRole: "attendee",
             token: token,
             channelName: channelName,
           ),
@@ -131,6 +132,7 @@ class _MeetScreenState extends State<MeetScreen> {
                 onPressed: () {
                   Get.offAll(
                     () => VideoCallScreen(
+                      clientRole: "host",
                       token: token,
                       channelName: channelName,
                     ),
