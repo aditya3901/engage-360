@@ -20,7 +20,7 @@ class _WelcomeState extends State<Welcome> {
             children: [
               Image.asset(
                 'assets/images/illustration-1.png',
-                width: 240,
+                width: 200,
               ),
               const SizedBox(
                 height: 18,

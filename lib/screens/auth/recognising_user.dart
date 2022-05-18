@@ -105,10 +105,23 @@ class _RecognisingUserState extends State<RecognisingUser> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xfff7f6fb),
+    return Scaffold(
+      backgroundColor: const Color(0xfff7f6fb),
       body: Center(
-        child: CupertinoActivityIndicator(radius: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            CupertinoActivityIndicator(radius: 16),
+            SizedBox(height: 14),
+            Text(
+              "Verifying Face...",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

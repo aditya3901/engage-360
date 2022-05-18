@@ -45,6 +45,7 @@ dependencies:
   shared_preferences: 
   google_fonts: 
   curved_navigation_bar: 
+  font_awesome_flutter: # Icons
 
   agora_rtc_engine: 
   permission_handler:

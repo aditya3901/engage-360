@@ -349,6 +349,7 @@ class _MeetScreenState extends State<MeetScreen> {
                     style: TextStyle(),
                   ),
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           ),

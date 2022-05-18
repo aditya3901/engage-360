@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:engage_360/models/attendance.dart';
 import 'package:engage_360/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../screens.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -14,6 +16,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String username = "";
   String userDp = "https://cdn.wallpapersafari.com/57/23/O0wQMK.jpg";
   String phoneNum = "";
+
+  List<Attendance> data = [
+    Attendance(attdn: "Present", percentage: 72),
+    Attendance(attdn: "Absent", percentage: 28),
+  ];
 
   void getUserData() async {
     final prefs = await SharedPreferences.getInstance();
@@ -37,6 +44,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Widget roundedButton(IconData icon) {
+      return ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          shape: const CircleBorder(),
+          padding: const EdgeInsets.all(12),
+        ),
+        child: Icon(icon, size: 30),
+      );
+    }
+
     return Scaffold(
       backgroundColor: const Color(0xfff7f6fb),
       body: SingleChildScrollView(
@@ -66,7 +84,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: 260,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 50),
+                            horizontal: 16,
+                            vertical: 50,
+                          ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,21 +159,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       color: Colors.black54,
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 2),
+                  const Text(
+                    "Welcome to Engage 360",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black38,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Icon(Icons.call),
-                      const SizedBox(width: 4),
-                      Text(
-                        "+91-$phoneNum",
-                        style: const TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
+                      roundedButton(Icons.phone),
+                      roundedButton(FontAwesomeIcons.slack),
+                      roundedButton(FontAwesomeIcons.github),
+                      roundedButton(FontAwesomeIcons.linkedinIn),
                     ],
                   ),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),

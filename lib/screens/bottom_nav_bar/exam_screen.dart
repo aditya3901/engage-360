@@ -15,7 +15,7 @@ class _ExamScreenState extends State<ExamScreen> {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: const Text(
-          "Face Monitor",
+          "Proctor 360",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 22,
