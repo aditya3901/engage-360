@@ -46,10 +46,10 @@ dependencies:
   google_fonts: 
   curved_navigation_bar: 
   font_awesome_flutter: # Icons
-
   agora_rtc_engine: 
   permission_handler:
   uuid: 
+  fl_chart: 
 
 dev_dependencies:
   flutter_test:

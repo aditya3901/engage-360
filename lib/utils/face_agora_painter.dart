@@ -9,8 +9,8 @@ class FaceAgoraPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final double scaleX = absoluteImageSize.width;
-    final double scaleY = absoluteImageSize.height;
+    final double scaleX = size.width / absoluteImageSize.width;
+    final double scaleY = size.height / absoluteImageSize.height;
 
     final Paint paint = Paint()
       ..style = PaintingStyle.stroke
@@ -18,12 +18,14 @@ class FaceAgoraPainter extends CustomPainter {
       ..color = Colors.greenAccent;
 
     for (FacePositionInfo face in faces) {
+      canvas.drawCircle(Offset(face.x * scaleX, face.y * scaleY), 3, paint);
+
       canvas.drawRRect(
         RRect.fromLTRBR(
-          face.x * 1.0,
-          face.y * 1.0,
-          (face.x + face.width) * 1.0,
-          (face.y + face.height) * 1.0,
+          (absoluteImageSize.width - (face.x + face.width)) * scaleX,
+          face.y * scaleY,
+          (absoluteImageSize.width - face.x) * scaleX,
+          (face.y + face.height) * scaleY,
           const Radius.circular(10),
         ),
         paint,
