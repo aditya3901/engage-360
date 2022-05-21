@@ -9,3 +9,4 @@ export './bottom_nav_bar/exam_screen.dart';
 export './bottom_nav_bar/profile_screen.dart';
 export './bottom_nav_bar/meet_screen.dart';
 export './video_call_screen.dart';
+export './proctoring_screen.dart';

@@ -12,9 +12,10 @@ import 'package:http/http.dart' as http;
 import '../screens.dart';
 
 class RecognisingUser extends StatefulWidget {
+  String purpose;
   File userImageFile;
   UserModel user;
-  RecognisingUser(this.userImageFile, this.user);
+  RecognisingUser(this.purpose, this.userImageFile, this.user);
 
   @override
   _RecognisingUserState createState() => _RecognisingUserState();
@@ -74,26 +75,40 @@ class _RecognisingUserState extends State<RecognisingUser> {
 
     final data = jsonDecode(response.body);
     if (data["isIdentical"] == true) {
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setBool("user_exist", true);
-      final user = UserModel(
-        name: widget.user.name,
-        phone: widget.user.phone,
-        image: widget.user.image,
-        faceId: widget.user.faceId,
-      );
-      final userJson = jsonEncode(user);
-      prefs.setString("current_user", userJson);
+      if (widget.purpose == "exam") {
+        Get.offAll(() => ProctoringScreen());
+      } else {
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setBool("user_exist", true);
+        final user = UserModel(
+          name: widget.user.name,
+          phone: widget.user.phone,
+          image: widget.user.image,
+          faceId: widget.user.faceId,
+        );
+        final userJson = jsonEncode(user);
+        prefs.setString("current_user", userJson);
 
-      Get.offAll(() => TabsScreen());
+        Get.offAll(() => TabsScreen());
+      }
     } else {
-      Get.snackbar(
-        "Login Failed! Face Didn't Match",
-        "Try clicking the picture with a better lighting.",
-        snackPosition: SnackPosition.TOP,
-        duration: const Duration(seconds: 4),
-      );
-      Get.offAll(() => Welcome());
+      if (widget.purpose == "exam") {
+        Get.snackbar(
+          "Face Didn't Match",
+          "Try clicking the picture with a better lighting.",
+          snackPosition: SnackPosition.TOP,
+          duration: const Duration(seconds: 3),
+        );
+        Get.offAll(() => TabsScreen());
+      } else {
+        Get.snackbar(
+          "Login Failed! Face Didn't Match",
+          "Try clicking the picture with a better lighting.",
+          snackPosition: SnackPosition.TOP,
+          duration: const Duration(seconds: 4),
+        );
+        Get.offAll(() => Welcome());
+      }
     }
   }
 
