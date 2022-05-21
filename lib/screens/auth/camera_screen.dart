@@ -74,8 +74,11 @@ class _CameraScreenState extends State<CameraScreen> {
 
   @override
   void dispose() {
-    cameraController?.dispose();
-    faceDetector!.close();
+    if (widget.purpose != "exam") {
+      cameraController?.dispose();
+      faceDetector!.close();
+    }
+
     super.dispose();
   }
 

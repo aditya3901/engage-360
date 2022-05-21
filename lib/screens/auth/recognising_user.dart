@@ -77,8 +77,7 @@ class _RecognisingUserState extends State<RecognisingUser> {
     if (data["isIdentical"] == true) {
       if (widget.purpose == "exam") {
         Get.offAll(() => ProctoringScreen());
-      } 
-      else {
+      } else {
         final prefs = await SharedPreferences.getInstance();
         prefs.setBool("user_exist", true);
         final user = UserModel(
@@ -93,13 +92,23 @@ class _RecognisingUserState extends State<RecognisingUser> {
         Get.offAll(() => TabsScreen());
       }
     } else {
-      Get.snackbar(
-        "Login Failed! Face Didn't Match",
-        "Try clicking the picture with a better lighting.",
-        snackPosition: SnackPosition.TOP,
-        duration: const Duration(seconds: 4),
-      );
-      Get.offAll(() => Welcome());
+      if (widget.purpose == "exam") {
+        Get.snackbar(
+          "Face Didn't Match",
+          "Try clicking the picture with a better lighting.",
+          snackPosition: SnackPosition.TOP,
+          duration: const Duration(seconds: 3),
+        );
+        Get.offAll(() => TabsScreen());
+      } else {
+        Get.snackbar(
+          "Login Failed! Face Didn't Match",
+          "Try clicking the picture with a better lighting.",
+          snackPosition: SnackPosition.TOP,
+          duration: const Duration(seconds: 4),
+        );
+        Get.offAll(() => Welcome());
+      }
     }
   }
 

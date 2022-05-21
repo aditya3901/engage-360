@@ -18,7 +18,7 @@ class _ProctoringScreenState extends State<ProctoringScreen> {
   CameraDescription? description;
   List<Face>? faceList;
   FaceDetector? faceDetector;
-  bool inCooldown = false;
+  bool inCooldown = false, isFaceDetected = true;
   int violationCounter = 0;
 
   initCamera() async {
@@ -53,17 +53,43 @@ class _ProctoringScreenState extends State<ProctoringScreen> {
     ).then((dynamic results) {
       faceList = results;
       if (faceList == null || faceList!.isEmpty) {
-        if (inCooldown == false) {
-          violationCounter++;
-          inCooldown = true;
-          Future.delayed(
-            const Duration(seconds: 10),
-            () {
-              inCooldown = false;
-            },
+        if (isFaceDetected == true) {
+          isFaceDetected = false;
+          Get.snackbar(
+            "No Face Detected",
+            "You've been disqualified from the test!",
+            snackPosition: SnackPosition.TOP,
+            duration: const Duration(seconds: 4),
           );
+          Get.offAll(() => TabsScreen());
+        }
+      } else {
+        if (faceList![0].leftEyeOpenProbability < 0.8 &&
+            faceList![0].rightEyeOpenProbability < 0.8) {
+          if (inCooldown == false) {
+            inCooldown = true;
+            Future.delayed(
+              const Duration(seconds: 5),
+              () {
+                if (faceList![0].leftEyeOpenProbability < 0.8) {
+                  violationCounter++;
+                  if (violationCounter == 3) {
+                    Get.snackbar(
+                      "Not looking at the screen",
+                      "You've been disqualified from the test!",
+                      snackPosition: SnackPosition.TOP,
+                      duration: const Duration(seconds: 4),
+                    );
+                    Get.offAll(() => TabsScreen());
+                  }
+                }
+                inCooldown = false;
+              },
+            );
+          }
         }
       }
+
       if (mounted) {
         setState(() {});
       }
@@ -186,17 +212,20 @@ class _ProctoringScreenState extends State<ProctoringScreen> {
               ),
             ],
           ),
-          faceList == null || faceList!.isEmpty
-              ? Center(
-                  child: Text(
-                    "NO FACE DETECTED\nViolation Count: $violationCounter/3",
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                    ),
-                  ),
-                )
+          faceList != null && faceList!.isNotEmpty
+              ? faceList![0].leftEyeOpenProbability < 0.8
+                  ? Center(
+                      child: Text(
+                        "Cheating Suspected\nLook at the screen\n\nViolation Count: $violationCounter/3",
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      ),
+                    )
+                  : Container()
               : Container(),
         ],
       ),
