@@ -39,8 +39,5 @@ class FaceDetectorPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(FaceDetectorPainter oldDelegate) {
-    return oldDelegate.absoluteImageSize != absoluteImageSize ||
-        oldDelegate.faces != faces;
-  }
+  bool shouldRepaint(FaceDetectorPainter oldDelegate) => true;
 }

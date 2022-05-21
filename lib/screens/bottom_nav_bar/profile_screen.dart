@@ -190,7 +190,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 60),
+            const SizedBox(height: 50),
             Text(
               username,
               style: const TextStyle(
@@ -208,7 +208,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 color: Colors.black38,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -226,10 +226,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   const Divider(thickness: 1),
                   const Text(
-                    "Attendance Details",
+                    "Meeting Attendance Details",
                     style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                       color: Colors.black54,
                     ),
                   ),

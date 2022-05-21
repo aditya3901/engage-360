@@ -144,9 +144,12 @@ class _CameraScreenState extends State<CameraScreen> {
                         cameraImage = File(image.path);
                         if (widget.purpose == "signup") {
                           Get.offAll(() => SignUpScreen(cameraImage!));
+                        } else if (widget.purpose == "login") {
+                          Get.offAll(() => RecognisingUser(
+                              "login", cameraImage!, widget.user!));
                         } else {
-                          Get.offAll(() =>
-                              RecognisingUser(cameraImage!, widget.user!));
+                          Get.offAll(() => RecognisingUser(
+                              "exam", cameraImage!, widget.user!));
                         }
                       }
                     },
