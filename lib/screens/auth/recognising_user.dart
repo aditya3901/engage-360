@@ -51,7 +51,11 @@ class _RecognisingUserState extends State<RecognisingUser> {
         snackPosition: SnackPosition.TOP,
         duration: const Duration(seconds: 4),
       );
-      Get.offAll(() => Welcome());
+      if (widget.purpose == "exam") {
+        Get.offAll(() => TabsScreen());
+      } else {
+        Get.offAll(() => Welcome());
+      }
     } else {
       final faceId = data[0]["faceId"];
 

@@ -18,7 +18,7 @@ class _ProctoringScreenState extends State<ProctoringScreen> {
   CameraDescription? description;
   List<Face>? faceList;
   FaceDetector? faceDetector;
-  bool inCooldown = false, isFaceDetected = true;
+  bool isFaceDetected = true, isNotLooking = false;
   int violationCounter = 0;
 
   initCamera() async {
@@ -64,10 +64,11 @@ class _ProctoringScreenState extends State<ProctoringScreen> {
           Get.offAll(() => TabsScreen());
         }
       } else {
+        // Looking Down
         if (faceList![0].leftEyeOpenProbability < 0.8 &&
             faceList![0].rightEyeOpenProbability < 0.8) {
-          if (inCooldown == false) {
-            inCooldown = true;
+          if (isNotLooking == false) {
+            isNotLooking = true;
             Future.delayed(
               const Duration(seconds: 5),
               () {
@@ -83,7 +84,34 @@ class _ProctoringScreenState extends State<ProctoringScreen> {
                     Get.offAll(() => TabsScreen());
                   }
                 }
-                inCooldown = false;
+                isNotLooking = false;
+              },
+            );
+          }
+        }
+
+        // Looking Sideways
+        if (faceList![0].headEulerAngleY >= 10.0 ||
+            faceList![0].headEulerAngleY <= -10.0) {
+          if (isNotLooking == false) {
+            isNotLooking = true;
+            Future.delayed(
+              const Duration(seconds: 5),
+              () {
+                if (faceList![0].headEulerAngleY >= 10.0 ||
+                    faceList![0].headEulerAngleY <= -10.0) {
+                  violationCounter++;
+                  if (violationCounter == 3) {
+                    Get.snackbar(
+                      "Not looking at the screen",
+                      "You've been disqualified from the test!",
+                      snackPosition: SnackPosition.TOP,
+                      duration: const Duration(seconds: 4),
+                    );
+                    Get.offAll(() => TabsScreen());
+                  }
+                }
+                isNotLooking = false;
               },
             );
           }
@@ -213,7 +241,9 @@ class _ProctoringScreenState extends State<ProctoringScreen> {
             ],
           ),
           faceList != null && faceList!.isNotEmpty
-              ? faceList![0].leftEyeOpenProbability < 0.8
+              ? (faceList![0].leftEyeOpenProbability < 0.8 ||
+                      faceList![0].headEulerAngleY >= 10.0 ||
+                      faceList![0].headEulerAngleY <= -10.0)
                   ? Center(
                       child: Text(
                         "Cheating Suspected\nLook at the screen\n\nViolation Count: $violationCounter/3",
