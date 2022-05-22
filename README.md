@@ -14,149 +14,22 @@ Engage 360 is your one-stop solution for everything related to Video Meetings & 
 
 Here's a curated list of all the major technologies that have been used to build Engage 360: 
 
-* [Flutter](https://flutter.dev/) : For building the UI of the app
-* [Dart](https://dart.dev/) : For building the backend of the app
-* [Azure Face API](https://azure.microsoft.com/en-in/services/cognitive-services/face/) : For Detecting and Verifying Face of the User
-* [Firebase ML Vision](https://developers.google.com/ml-kit/vision/face-detection) : For Detecting Face in real-time from Camera Stream
-* [Agora WebRTC](https://www.agora.io/en/) : For implementing the Video Calling Feature
-* [Firebase Database](https://firebase.google.com/docs/database) : For Storing User's Data and other app events
+* <b>[Flutter](https://flutter.dev/)</b> : For building the UI of the app
+* <b>[Dart](https://dart.dev/)</b> : For building the backend of the app
+* <b>[Azure Face Api](https://azure.microsoft.com/en-in/services/cognitive-services/face/)</b> : For Detecting and Verifying Face of the User
+* <b>[Firebase ML Vision](https://developers.google.com/ml-kit/vision/face-detection)</b> : For Detecting Face in real-time from Camera Stream
+* <b>[Agora WebRTC](https://www.agora.io/en/)</b> : For implementing the Video Calling Feature
+* <b>[Firebase Database](https://firebase.google.com/docs/database)</b> : For Storing User's Data and other app events
 
+## Features of Engage 360
+### # Authentication 
 
-<!-- GETTING STARTED -->
-## Getting Started
+* **Signup** : The user first needs to click an image of his face. The image is then sent to Azure **Face Detection Api** to detect the face from the image and return us a faceId which is later used for verifying the user. After that the user needs to enter his name and phone number and all these datas are then stored in the database and the user is signed in. 
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+* **Login** : The user first needs to enter his phone number using which we query the database to see if the user already exist or not. If user exist, then the user needs to click an image of his face and now his image is again sent to the Azure **Face Detection Api** to get a faceId and then this faceId and the faceId from the database is sent to Azure **Face Verification Api** to verify the user. If the face matches, the user is logged in. 
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+|![](https://github.com/aditya3901/aditya3901/blob/main/Engage1.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage3.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage2.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage4.png)|
+|-|-|-|-|
 
 ## Getting Started
 
