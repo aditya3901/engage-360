@@ -22,11 +22,11 @@ Here's a curated list of all the major technologies that have been used to build
 * <b>[Firebase Database](https://firebase.google.com/docs/database)</b> : For Storing User's Data and other app events
 
 ## Features of Engage 360
-### # Authentication 
+### # Face Recognition Based Authentication System
 
-* **Signup** : The user first needs to click an image of his face. The image is then sent to Azure **Face Detection Api** to detect the face from the image and return us a faceId which is later used for verifying the user. After that the user needs to enter his name and phone number and all these datas are then stored in the database and the user is signed in. 
+* **Signup** : The user first needs to click an image of his face. The image is then sent to **Face Detection Api** to detect face from the image and return us a faceId which is later used for verifying the user. After that the user needs to enter his name and phone number and all these datas are then stored in the database and the user is signed in. 
 
-* **Login** : The user first needs to enter his phone number using which we query the database to see if the user already exist or not. If user exist, then the user needs to click an image of his face and now his image is again sent to the Azure **Face Detection Api** to get a faceId and then this faceId and the faceId from the database is sent to Azure **Face Verification Api** to verify the user. If the face matches, the user is logged in. 
+* **Login** : The user first needs to enter his phone number using which we query the database to see if the user already exist or not. If user exist, then the user needs to click an image of his face and now his image is again sent to the **Face Detection Api** to get a faceId and then this faceId and the faceId from the database is sent to **Face Verification Api** to verify the user. If the face matches, the user is logged in. 
 
 |![](https://github.com/aditya3901/aditya3901/blob/main/Engage1.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage3.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage2.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage4.png)|
 |-|-|-|-|
