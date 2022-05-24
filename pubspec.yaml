@@ -50,6 +50,7 @@ dependencies:
   permission_handler:
   uuid: 
   fl_chart: 
+  bulleted_list: 
 
 dev_dependencies:
   flutter_test:

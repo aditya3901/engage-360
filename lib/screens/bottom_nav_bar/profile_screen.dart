@@ -4,11 +4,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../screens.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -47,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
-        color: Colors.deepPurple,
+        color: Colors.deepPurple.shade400,
         value: presentPercent * 1.0,
       ),
       PieChartSectionData(
@@ -56,7 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
-        color: Colors.red,
+        color: Colors.red.shade400,
         value: absentPercent * 1.0,
       ),
     ];
@@ -90,14 +89,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Widget roundedButton(IconData icon) {
-      return ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          shape: const CircleBorder(),
-          padding: const EdgeInsets.all(12),
+    Widget listItem(IconData icon, String item) {
+      return Card(
+        elevation: 3,
+        color: const Color.fromARGB(255, 254, 254, 255),
+        margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
         ),
-        child: Icon(icon, size: 30),
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                color: Colors.deepPurple,
+              ),
+              const SizedBox(width: 15),
+              Text(
+                item,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
+              ),
+              const Spacer(),
+              const Icon(
+                CupertinoIcons.right_chevron,
+                color: Colors.black54,
+              ),
+            ],
+          ),
+        ),
       );
     }
 
@@ -110,23 +135,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               clipBehavior: Clip.none,
               alignment: Alignment.center,
               children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.red,
-                        Colors.deepPurple,
-                      ],
-                    ),
-                  ),
+                SizedBox(
                   width: double.infinity,
                   height: 260,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
-                      vertical: 50,
+                      vertical: 45,
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,19 +149,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         InkWell(
                           onTap: () {},
-                          child: const Text(
-                            "Settings",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                            ),
+                          child: const Icon(
+                            Icons.settings,
+                            color: Colors.deepPurple,
                           ),
                         ),
                         const Text(
                           "Profile",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black54,
                             fontWeight: FontWeight.w600,
                             fontSize: 24,
                           ),
@@ -157,13 +168,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             prefs.clear();
                             Get.offAll(() => Welcome());
                           },
-                          child: const Text(
-                            "Logout",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
+                          child: const Icon(
+                            Icons.logout,
+                            color: Colors.deepPurple,
                           ),
                         ),
                       ],
@@ -171,7 +178,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 Positioned(
-                  top: 130,
+                  top: 100,
                   child: Card(
                     elevation: 6,
                     shape: RoundedRectangleBorder(
@@ -190,7 +197,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 30),
             Text(
               username,
               style: const TextStyle(
@@ -209,111 +216,135 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             const SizedBox(height: 30),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                roundedButton(Icons.phone),
-                roundedButton(FontAwesomeIcons.slack),
-                roundedButton(FontAwesomeIcons.github),
-                roundedButton(FontAwesomeIcons.linkedinIn),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Divider(thickness: 1),
-                  const Text(
-                    "Meeting Attendance Details",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black54,
+            Card(
+              elevation: 6,
+              color: Colors.deepPurple,
+              margin: const EdgeInsets.symmetric(horizontal: 18),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(28),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(18),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(
+                      FontAwesomeIcons.chartLine,
+                      color: Color(0xfff7f6fb),
                     ),
-                  ),
-                  const Divider(thickness: 1),
-                  const SizedBox(height: 6),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
-                        height: 180,
-                        width: 180,
-                        child: gettingAttdn
-                            ? const CupertinoActivityIndicator(radius: 16)
-                            : (present == 0 && absent == 0)
-                                ? const Center(
-                                    child: Text(
-                                      "No Data Available",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black54,
-                                      ),
-                                    ),
-                                  )
-                                : PieChart(
-                                    PieChartData(
-                                      sections: pieData,
-                                      sectionsSpace: 3,
-                                    ),
-                                  ),
+                    SizedBox(width: 12),
+                    Text(
+                      "Get Attendance",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xfff7f6fb),
                       ),
-                      Column(
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontFamily: GoogleFonts.robotoSlab().fontFamily,
-                              ),
-                              children: const [
-                                WidgetSpan(
-                                  child: Icon(
-                                    Icons.circle,
-                                    size: 16,
-                                    color: Colors.deepPurple,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: "   Present",
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontFamily: GoogleFonts.robotoSlab().fontFamily,
-                              ),
-                              children: const [
-                                WidgetSpan(
-                                  child: Icon(
-                                    Icons.circle,
-                                    size: 16,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: "   Absent ",
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  const Divider(thickness: 1),
-                ],
+                    ),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 60),
+            const SizedBox(height: 20),
+            listItem(Icons.security, "Privacy"),
+            listItem(Icons.help_outline_rounded, "Help & Support"),
+            listItem(Icons.person_add_alt_outlined, "Invite a Friend"),
+            listItem(Icons.star_border, "Rate Us"),
+            const SizedBox(height: 80),
+            // Padding(
+            //   padding: const EdgeInsets.all(20),
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: [
+            //       const Divider(thickness: 1),
+            //       const Text(
+            //         "Meeting Attendance Details",
+            //         style: TextStyle(
+            //           fontSize: 16,
+            //           color: Colors.black54,
+            //         ),
+            //       ),
+            //       const Divider(thickness: 1),
+            //       const SizedBox(height: 6),
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //         children: [
+            //           SizedBox(
+            //             height: 180,
+            //             width: 180,
+            //             child: gettingAttdn
+            //                 ? const CupertinoActivityIndicator(radius: 16)
+            //                 : (present == 0 && absent == 0)
+            //                     ? const Center(
+            //                         child: Text(
+            //                           "No Data Available",
+            //                           style: TextStyle(
+            //                             fontWeight: FontWeight.bold,
+            //                             color: Colors.black54,
+            //                           ),
+            //                         ),
+            //                       )
+            //                     : PieChart(
+            //                         PieChartData(
+            //                           sections: pieData,
+            //                           sectionsSpace: 3,
+            //                         ),
+            //                       ),
+            //           ),
+            //           Column(
+            //             children: [
+            //               RichText(
+            //                 text: TextSpan(
+            //                   style: TextStyle(
+            //                     color: Colors.black,
+            //                     fontSize: 16,
+            //                     fontFamily: GoogleFonts.robotoSlab().fontFamily,
+            //                   ),
+            //                   children: const [
+            //                     WidgetSpan(
+            //                       child: Icon(
+            //                         Icons.circle,
+            //                         size: 16,
+            //                         color: Colors.deepPurple,
+            //                       ),
+            //                     ),
+            //                     TextSpan(
+            //                       text: "   Present",
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               const SizedBox(height: 6),
+            //               RichText(
+            //                 text: TextSpan(
+            //                   style: TextStyle(
+            //                     color: Colors.black,
+            //                     fontSize: 16,
+            //                     fontFamily: GoogleFonts.robotoSlab().fontFamily,
+            //                   ),
+            //                   children: const [
+            //                     WidgetSpan(
+            //                       child: Icon(
+            //                         Icons.circle,
+            //                         size: 16,
+            //                         color: Colors.red,
+            //                       ),
+            //                     ),
+            //                     TextSpan(
+            //                       text: "   Absent ",
+            //                     ),
+            //                   ],
+            //                 ),
+            //               )
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //       const SizedBox(height: 6),
+            //       const Divider(thickness: 1),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),

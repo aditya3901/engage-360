@@ -217,12 +217,12 @@ class _MeetScreenState extends State<MeetScreen> {
       ),
       body: ModalProgressHUD(
         inAsyncCall: _gettingToken,
-        child: SafeArea(
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 100),
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 60),
+          child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 24),
+                const SizedBox(height: 14),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -316,10 +316,10 @@ class _MeetScreenState extends State<MeetScreen> {
                     ),
                   ),
                 ),
-                const Spacer(),
+                const SizedBox(height: 50),
                 Container(
-                  width: 160,
-                  height: 160,
+                  width: 200,
+                  height: 200,
                   decoration: BoxDecoration(
                     color: Colors.deepPurple.shade50,
                     shape: BoxShape.circle,
