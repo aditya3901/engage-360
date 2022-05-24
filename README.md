@@ -7,8 +7,14 @@
 
 ## About The Project
 
-Engage 360 is your one-stop solution for everything related to Video Meetings & Online Exam Monitoring! Engage 360 provides services such as <b>Face Recognition Based Authentication System, Automated Attendance System during Live Video Call Meetings, Online Exam Proctoring System</b> and much more.
+Engage 360 aims to resolve the problems faced by people in the online mode of education and examination! Engage 360 provides services such as <b>Face Recognition Based Authentication System, Automated Attendance System during Live Video Call Meetings, Online Exam Proctoring System</b> and much more.
 
+## Core Features
+
+* <b>Face Recognition Based Authentication System</b>
+* <b>Automated Attendance System during Video Call Meetings</b>&nbsp;&nbsp;⭐
+* <b>Online Exam Proctoring | Cheating Detection System</b>&nbsp;&nbsp;⭐&nbsp;⭐
+* <b>User's Attendance Tracking</b>
 
 ## Built With
 
