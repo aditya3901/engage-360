@@ -1,10 +1,17 @@
 import 'dart:convert';
+import 'package:engage_360/models/user_model.dart';
 import 'package:engage_360/screens/screens.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import '../../constants.dart';
 
@@ -16,6 +23,10 @@ class MeetScreen extends StatefulWidget {
 class _MeetScreenState extends State<MeetScreen> {
   bool _gettingToken = false;
   final _joinCode = TextEditingController();
+  bool gettingAttdn = false;
+  int present = 0, absent = 0;
+  List<PieChartSectionData> pieData = [];
+  UserModel? user;
 
   void getAgoraToken(String channelName, String purpose) async {
     setState(() {
@@ -197,6 +208,70 @@ class _MeetScreenState extends State<MeetScreen> {
     );
   }
 
+  void _getUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    String userStr = prefs.getString("current_user") ?? "";
+    user = UserModel.fromJson(jsonDecode(userStr));
+  }
+
+  void getAttendance() async {
+    if (mounted) {
+      setState(() {
+        gettingAttdn = true;
+      });
+    }
+
+    final ref = FirebaseDatabase.instance.ref("Attendance");
+    await ref.once().then((event) {
+      for (var room in event.snapshot.children) {
+        for (var person in room.children) {
+          if (person.key == user!.name) {
+            if (person.value == "Present") {
+              present++;
+            } else {
+              absent++;
+            }
+          }
+        }
+      }
+    });
+
+    final presentPercent = (present / (present + absent)) * 100;
+    final absentPercent = (absent / (present + absent)) * 100;
+    pieData = [
+      PieChartSectionData(
+        title: "${presentPercent.toInt()}%",
+        titleStyle: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        color: Colors.deepPurple.shade400,
+        value: presentPercent * 1.0,
+      ),
+      PieChartSectionData(
+        title: "${absentPercent.toInt()}%",
+        titleStyle: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        color: Colors.red.shade400,
+        value: absentPercent * 1.0,
+      ),
+    ];
+
+    if (mounted) {
+      setState(() {
+        gettingAttdn = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -303,20 +378,125 @@ class _MeetScreenState extends State<MeetScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 34),
+                const SizedBox(height: 24),
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  child: const Text(
-                    "Scheduled Meetings",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black54,
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 243, 238, 249),
+                    border: Border.all(
+                      color: Colors.black12,
                     ),
+                    borderRadius: const BorderRadius.all(Radius.circular(24)),
+                  ),
+                  child: ExpansionTile(
+                    onExpansionChanged: (val) {
+                      if (val == true) {
+                        getAttendance();
+                      }
+                    },
+                    tilePadding: const EdgeInsets.symmetric(horizontal: 18),
+                    leading: const Icon(
+                      FontAwesomeIcons.chartLine,
+                      color: Colors.deepPurple,
+                    ),
+                    title: const Text(
+                      "Show Attendance",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    children: [
+                      SizedBox(
+                        height: 180,
+                        width: 180,
+                        child: gettingAttdn
+                            ? const CupertinoActivityIndicator(radius: 16)
+                            : (present == 0 && absent == 0)
+                                ? const Center(
+                                    child: Text(
+                                      "No Data Available",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black54,
+                                      ),
+                                    ),
+                                  )
+                                : PieChart(
+                                    PieChartData(
+                                      sections: pieData,
+                                      sectionsSpace: 3,
+                                    ),
+                                  ),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          const SizedBox(width: 20),
+                          RichText(
+                            text: TextSpan(
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontFamily: GoogleFonts.robotoSlab().fontFamily,
+                              ),
+                              children: const [
+                                WidgetSpan(
+                                  child: Icon(
+                                    Icons.circle,
+                                    size: 16,
+                                    color: Colors.deepPurple,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: "  Present",
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Spacer(),
+                          RichText(
+                            text: TextSpan(
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontFamily: GoogleFonts.robotoSlab().fontFamily,
+                              ),
+                              children: const [
+                                WidgetSpan(
+                                  child: Icon(
+                                    Icons.circle,
+                                    size: 16,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: "  Absent",
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                        ],
+                      ),
+                      const SizedBox(height: 14),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 14),
+                const Text(
+                  "Scheduled Meetings",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
+                ),
+                const SizedBox(height: 35),
                 Container(
                   width: 200,
                   height: 200,
