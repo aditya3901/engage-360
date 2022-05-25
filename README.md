@@ -7,14 +7,13 @@
 
 ## About The Project
 
-Engage 360 aims to resolve the problems faced by people in the online mode of education and examination! Engage 360 provides services such as <b>Face Recognition Based Authentication System, Automated Attendance System during Live Video Call Meetings, Online Exam Proctoring System</b> and much more.
+Engage 360 aims to resolve the problems faced by people in the online mode of education and examination! Engage 360 provides solution to the problems such as <b>Identity Theft, Proxy Attendance and Cheating during Online Examinations</b>.
 
 ## Core Features
 
 * <b>Face Recognition Based Authentication System</b>
 * <b>Automated Attendance System during Video Call Meetings</b>&nbsp;&nbsp;⭐
 * <b>Online Exam Proctoring | Cheating Detection System</b>&nbsp;&nbsp;⭐&nbsp;⭐
-* <b>User's Attendance Tracking</b>
 
 ## Built With
 
@@ -27,9 +26,18 @@ Here's a curated list of all the major technologies that have been used to build
 * <b>[Agora WebRTC](https://www.agora.io/en/)</b> : For implementing the Video Calling Feature
 * <b>[Firebase Database](https://firebase.google.com/docs/database)</b> : For Storing User's Data and other app events
 
+## Instructions for Project Setup
+* Clone the repo to your local system
+* After opening the project, first thing to do is **to get the packages**. Type the following in the terminal :
+    - **flutter pub get**
+* Now open your **android** emulator or connect your **android** device.
+* To run the code, go to the terminal and type : 
+    - **flutter run --no-sound-null-safety**
+    - Firebase ML SDK doesn't support sound null safety. 
+
 ## Features of Engage 360
 ### ‣ Face Recognition Based Authentication System 
-For Authentication, the **Azure Face Api** was used and for painting the box around the face, the **Firebase ML Vision SDK** was used.
+For Authentication, the **Azure Face Api** was used and for painting the box around the face in real-time, the **Firebase ML Vision SDK** was used.
 
 * **Signup** : The user first needs to click an image of his face. The image is then sent to **Face Detection Api** which returns us a **faceId** which is later used to verify the user. After that the user needs to enter his **name** and **phone number** and all these datas are then stored in the **database** and the user is signed in. 
 
@@ -39,22 +47,28 @@ For Authentication, the **Azure Face Api** was used and for painting the box aro
 |-|-|-|-|
 <br>
 
-### ‣ Automated Attendance System during Live Video Call Meetings
-For Video Calling, the **Agora WebRTC** Engine was used which provides integrated **Face Detection Callback** to monitor face during video call. There are two ways to join a meeting and each way has its own separate roles: 
+### ‣ Automated Attendance System during Video Call Meetings
+For Video Calling, the **Agora WebRTC** Engine was used which provides integrated **Face Detection Callback** to monitor face during video call. For storing data, the **Firebase Database** was used. There are two ways to join a meeting and each way has its own separate roles: 
 
-* **Host** : The Host needs to create a new Room and share the Room-Id with the attendees. During the entire duration of the meet, the **face of the attendee gets monitored**. When the host leaves, everyone else is removed from the room and all those who were in the meet till then will be marked as **present**. 
+* **Host** : The Host needs to create a new Room and share the Room-Id with the attendees.
+* **Attendee** : The Attendee joins the room using the room-id from the host. 
+* During the entire duration of the meet, the **face of the attendee gets monitored**.
+    * At any point of the meet, if the **face of the attendee is not detected**, he is given a warning and his **violation counter is increased by +1**.
+* If the violation counter reaches 3, he'll be **removed from the room** and marked as **absent**.
+* When the host leaves, everyone else is removed from the room and all those who were in the meet till then will be marked as **present**. 
 
-* **Attendee** : The Attendee joins the room using the room-id from the host. At any point of the meet, if the **face of the attendee is not detected**, he is given a warning and his **violation counter is increased by +1**. If the violation counter reaches 3, he'll be **removed from the room** and marked as **absent**.
 
-## Getting Started
+### ‣ Online Exam Proctoring | Cheating Detection System &nbsp;&nbsp;⭐
+The main idea behind this was that during online interviews/exams, the video, audio and screen of the candidate is already shared over the video calling platforms like G-meet or MS-Teams. But the proctor has to manually check the candidate's face to see whether he's cheating.
 
-This project is a starting point for a Flutter application.
+Here Engage 360 comes into play. During the entire duration of the test, the face of the candidate is monitored through the app. Here's more details about it: 
 
-A few resources to get you started if this is your first Flutter project:
+* Before entering the test, the candidate has to **verify his face** by clicking an image. This prevents proxy test attempts.
+* Once started, the face of the candidate is constantly monitored.
+* At any time during the test, if the **face is not detected**, the candidate will be **immediately disqualified**. 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Since the video, audio and screen of the candidate is already shared over the video calling platforms, there's only **3 places around him** from where he can cheat. Either by looking down at his phone/notes or by looking left or right.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* If the candidate **tries to look down**, he'll be shown a warning and his violation counter will be increased.
+* If the candidate **rotates his head left or right frequently**, he'll be shown a warning and his violation counter will be increased.
+* If the violation counter reaches 3, the candidate will be **disqualified**.
