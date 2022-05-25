@@ -48,9 +48,10 @@ dependencies:
   font_awesome_flutter: # Icons
   agora_rtc_engine: 
   permission_handler:
-  uuid: 
+  uuid: # For generating unique Room-Id each time
   fl_chart: 
   bulleted_list: 
+  url_launcher: 
 
 dev_dependencies:
   flutter_test:
