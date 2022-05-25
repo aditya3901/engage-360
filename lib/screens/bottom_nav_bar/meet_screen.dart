@@ -236,28 +236,30 @@ class _MeetScreenState extends State<MeetScreen> {
       }
     });
 
-    final presentPercent = (present / (present + absent)) * 100;
-    final absentPercent = (absent / (present + absent)) * 100;
-    pieData = [
-      PieChartSectionData(
-        title: "${presentPercent.toInt()}%",
-        titleStyle: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
+    if (present != 0 || absent != 0) {
+      final presentPercent = (present / (present + absent)) * 100;
+      final absentPercent = (absent / (present + absent)) * 100;
+      pieData = [
+        PieChartSectionData(
+          title: "${presentPercent.toInt()}%",
+          titleStyle: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+          color: Colors.deepPurple.shade400,
+          value: presentPercent * 1.0,
         ),
-        color: Colors.deepPurple.shade400,
-        value: presentPercent * 1.0,
-      ),
-      PieChartSectionData(
-        title: "${absentPercent.toInt()}%",
-        titleStyle: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
+        PieChartSectionData(
+          title: "${absentPercent.toInt()}%",
+          titleStyle: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+          color: Colors.red.shade400,
+          value: absentPercent * 1.0,
         ),
-        color: Colors.red.shade400,
-        value: absentPercent * 1.0,
-      ),
-    ];
+      ];
+    }
 
     if (mounted) {
       setState(() {

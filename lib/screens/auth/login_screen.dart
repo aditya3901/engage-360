@@ -45,23 +45,20 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfff7f6fb),
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
-        elevation: 0,
       ),
-      backgroundColor: const Color(0xfff7f6fb),
       body: ModalProgressHUD(
         inAsyncCall: isWorking,
-        child: SafeArea(
+        child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 58,
-                  ),
                   Container(
                     width: 200,
                     height: 200,
