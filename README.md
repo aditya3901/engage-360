@@ -15,6 +15,9 @@ Engage 360 aims to resolve the problems faced by people in the online mode of ed
 * <b>Automated Attendance System during Video Call Meetings</b>&nbsp;&nbsp;⭐
 * <b>Online Exam Proctoring | Cheating Detection System</b>&nbsp;&nbsp;⭐&nbsp;⭐
 
+|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_1.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_2.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_3.png)|
+|-|-|-|
+
 ## Built With
 
 Here's a curated list of all the major technologies that have been used to build Engage 360: 
@@ -43,7 +46,7 @@ For Authentication, the **Azure Face Api** was used and for painting the box aro
 
 * **Login** : The user first needs to enter his phone number using which we **query the database** to see if the user already exist or not. If user exist, then he needs to click an image of his face and now this image is again sent to the **Face Detection Api** to get a faceId and then this faceId and the faceId from the database is sent to **Face Verification Api**. If the face matches, the user is logged in. 
 
-|![](https://github.com/aditya3901/aditya3901/blob/main/Engage1.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage3.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage2.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage4.png)|
+|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_4.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_5.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_6.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_7.png)|
 |-|-|-|-|
 <br>
 
