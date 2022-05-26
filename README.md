@@ -42,15 +42,19 @@ Here's a curated list of all the major technologies that have been used to build
 ### ‣ Face Recognition Based Authentication System 
 For Authentication, the **Azure Face Api** was used and for painting the box around the face in real-time, the **Firebase ML Vision SDK** was used.
 
-* **Signup** : The user first needs to click an image of his face. The image is then sent to **Face Detection Api** which returns us a **faceId** which is later used to verify the user. After that the user needs to enter his **name** and **phone number** and all these datas are then stored in the **database** and the user is signed in. 
+* **Signup** : The user first needs to click an image of his face. 
+    * The image is then sent to **Face Detection Api** which returns us a **faceId** which is later used to verify the user. 
+    * After that the user needs to enter his **name** & **phone number** and all these datas are then stored in the **database**. 
 
-* **Login** : The user first needs to enter his phone number using which we **query the database** to see if the user already exist or not. If user exist, then he needs to click an image of his face and now this image is again sent to the **Face Detection Api** to get a faceId and then this faceId and the faceId from the database is sent to **Face Verification Api**. If the face matches, the user is logged in. 
+* **Login** : The user first needs to enter his phone number using which we **query the database** to see if the user already exist or not. 
+    * If user exist, then he needs to click an image of his face and now this image is again sent to the **Face Detection Api** to get a faceId. 
+    * Then this faceId and the faceId from the database is sent to **Face Verification Api**. If the face matches, the user is logged in. 
 
 |![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_4.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_5.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_6.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_7.png)|
 |-|-|-|-|
 <br>
 
-### ‣ Automated Attendance System during Video Call Meetings
+### ‣ Automated Attendance System during Video Call Meetings &nbsp;⭐
 For Video Calling, the **Agora WebRTC** Engine was used which provides integrated **Face Detection Callback** to monitor face during video call. For storing data, the **Firebase Database** was used. There are two ways to join a meeting and each way has its own separate roles: 
 
 * **Host** : The Host needs to create a new Room and share the Room-Id with the attendees.
@@ -60,8 +64,11 @@ For Video Calling, the **Agora WebRTC** Engine was used which provides integrate
 * If the violation counter reaches 3, he'll be **removed from the room** and marked as **absent**.
 * When the host leaves, everyone else is removed from the room and all those who were in the meet till then will be marked as **present**. 
 
+|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_8.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_9.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_10.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_11.png)|
+|-|-|-|-|
+<br>
 
-### ‣ Online Exam Proctoring | Cheating Detection System &nbsp;&nbsp;⭐
+### ‣ Online Exam Proctoring | Cheating Detection System &nbsp;&nbsp;⭐&nbsp;⭐
 The main idea behind this was that during online interviews/exams, the video, audio and screen of the candidate is already shared over the video calling platforms like G-meet or MS-Teams. But the proctor has to manually check the candidate's face to see whether he's cheating.
 
 Here Engage 360 comes into play. During the entire duration of the test, the face of the candidate is monitored through the app. Here's more details about it: 
