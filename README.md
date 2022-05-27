@@ -7,7 +7,7 @@
 
 ## About The Project
 
-Engage 360 aims to resolve the problems faced by people in the online mode of education and examination! Engage 360 provides solution to the problems such as <b>Identity Theft, Proxy Attendance and Cheating during Online Examinations</b>.
+Engage 360 aims to resolve the problems faced by people in the online mode of education and examination! Engage 360 provides solution to the problems such as <b>Proxy User, Proxy Attendance and Cheating during Online Examinations</b>.
 
 ## Core Features
 
@@ -42,12 +42,13 @@ Here's a curated list of all the major technologies that have been used to build
 ### ‣ Face Recognition Based Authentication System 
 For Authentication, the **Azure Face Api** was used and for painting the box around the face in real-time, the **Firebase ML Vision SDK** was used.
 
-* **Signup** : The user first needs to click an image of his face. 
-    * The image is then sent to **Face Detection Api** which returns us a **faceId** which is later used to verify the user. 
-    * After that the user needs to enter his **name** & **phone number** and all these datas are then stored in the **database**. 
+* **Signup** : 
+    * The user first needs to click an image of his face. The image is then sent to **Face Detection Api** which returns us a **faceId** which is later used to verify the user. 
+    * After that the user needs to enter his **name** & **phone number** and all these datas are then stored in the **database** & the user is signed in. 
 
-* **Login** : The user first needs to enter his phone number using which we **query the database** to see if the user already exist or not. 
-    * If user exist, then he needs to click an image of his face and now this image is again sent to the **Face Detection Api** to get a faceId. 
+* **Login** : 
+    * The user first needs to enter his phone number using which we **query the database** to see if the user already exist or not. 
+    * If user exist, then he needs to click an image of his face & now this image is sent to the **Face Detection Api** to get a faceId. 
     * Then this faceId and the faceId from the database is sent to **Face Verification Api**. If the face matches, the user is logged in. 
 
 |![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_4.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_5.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_6.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_7.png)|
@@ -82,3 +83,7 @@ Since the video, audio and screen of the candidate is already shared over the vi
 * If the candidate **tries to look down**, he'll be shown a warning and his violation counter will be increased.
 * If the candidate **rotates his head left or right frequently**, he'll be shown a warning and his violation counter will be increased.
 * If the violation counter reaches 3, the candidate will be **disqualified**.
+
+|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_12.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_13.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_14.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_15.png)|
+|-|-|-|-|
+<br>
