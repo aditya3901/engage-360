@@ -500,8 +500,8 @@ class _MeetScreenState extends State<MeetScreen> {
                 ),
                 const SizedBox(height: 35),
                 Container(
-                  width: 200,
-                  height: 200,
+                  width: 180,
+                  height: 180,
                   decoration: BoxDecoration(
                     color: Colors.deepPurple.shade50,
                     shape: BoxShape.circle,
