@@ -85,7 +85,7 @@ class _ExamScreenState extends State<ExamScreen> {
               ),
               const SizedBox(height: 15),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 12),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: const Text(
                   "Exam Guidelines :",
                   style: TextStyle(

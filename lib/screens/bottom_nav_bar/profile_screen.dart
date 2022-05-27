@@ -91,76 +91,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       backgroundColor: const Color(0xfff7f6fb),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: const Text(
+          "Profile",
+          style: TextStyle(
+            color: Colors.black54,
+            fontWeight: FontWeight.w600,
+            fontSize: 24,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              final prefs = await SharedPreferences.getInstance();
+              prefs.clear();
+              Get.offAll(() => Welcome());
+            },
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.deepPurple,
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.center,
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: 260,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 45,
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          onTap: () {},
-                          child: const Icon(
-                            Icons.settings,
-                            color: Colors.deepPurple,
-                          ),
-                        ),
-                        const Text(
-                          "Profile",
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 24,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            final prefs = await SharedPreferences.getInstance();
-                            prefs.clear();
-                            Get.offAll(() => Welcome());
-                          },
-                          child: const Icon(
-                            Icons.logout,
-                            color: Colors.deepPurple,
-                          ),
-                        ),
-                      ],
-                    ),
+            Card(
+              elevation: 6,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(140)),
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: CircleAvatar(
+                  backgroundColor: Colors.black12,
+                  backgroundImage: NetworkImage(
+                    userDp,
                   ),
+                  radius: 80,
                 ),
-                Positioned(
-                  top: 100,
-                  child: Card(
-                    elevation: 6,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(140)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.black12,
-                        backgroundImage: NetworkImage(
-                          userDp,
-                        ),
-                        radius: 80,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             Text(
               username,
               style: const TextStyle(

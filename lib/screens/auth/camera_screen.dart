@@ -30,7 +30,7 @@ class _CameraScreenState extends State<CameraScreen> {
   initCamera() async {
     description = await UtilsScanner.getCamera(cameraDirection);
 
-    cameraController = CameraController(description!, ResolutionPreset.medium);
+    cameraController = CameraController(description!, ResolutionPreset.low);
 
     faceDetector = FirebaseVision.instance.faceDetector(
       const FaceDetectorOptions(
