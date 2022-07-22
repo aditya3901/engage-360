@@ -1,8 +1,3 @@
-### Engage 360 Apk 
-* Go to => <a href="https://drive.google.com/file/d/1DCaeiw5HTa_xCrSz6re1OIwRV71UHHz6/view?usp=sharing">Apk Download Link</a>
-* Click the Download Icon at the Top Right.
-* Click Download Anyway.
-
 <!-- PROJECT LOGO -->
 <div align=center>
     <img width=200 src="https://github.com/aditya3901/engage-360/blob/master/assets/images/appicon.png" alt="Logo" width="200" height="200">
