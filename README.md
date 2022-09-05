@@ -12,8 +12,8 @@ Engage 360 aims to resolve the problems faced by people in the online mode of ed
 ## Core Features
 
 * <b>Face Recognition Based Authentication System</b>
-* <b>Automated Attendance System during Video Call Meetings</b>&nbsp;&nbsp;⭐
-* <b>Online Exam Proctoring | Cheating Detection System</b>&nbsp;&nbsp;⭐&nbsp;⭐
+* <b>Automated Attendance System integrated in video-conference</b>&nbsp;&nbsp;⭐
+* <b>Online Exam Proctoring System</b>&nbsp;&nbsp;⭐&nbsp;⭐
 
 |![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_1.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_2.png)|![](https://github.com/aditya3901/aditya3901/blob/main/Engage-360/pic_3.png)|
 |-|-|-|
